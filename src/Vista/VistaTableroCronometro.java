@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 import java.util.StringTokenizer;
 
 import javax.swing.ImageIcon;
@@ -31,6 +32,7 @@ public class VistaTableroCronometro extends javax.swing.JFrame{
     private javax.swing.JButton btnStop;
     private javax.swing.JButton btnGanar;
     private javax.swing.JButton btnPerder;
+    private javax.swing.JButton btnCasilla;
     private javax.swing.JLabel etiquetaReloj;
     private javax.swing.JLabel etiquetaTiempo;
     private javax.swing.JLabel etiquetaTitulo;
@@ -56,10 +58,11 @@ public class VistaTableroCronometro extends javax.swing.JFrame{
 	        btnPause = new javax.swing.JButton();
 	        btnGanar = new javax.swing.JButton();
 	        btnPerder = new javax.swing.JButton();
+	        btnCasilla = new javax.swing.JButton();
 	        btnStop = new javax.swing.JButton();
 	        
 	        
-	        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+	      //  setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 	        setTitle("Buscovid");
 
 	        this.getContentPane().add(pnlCrono);
@@ -73,10 +76,10 @@ public class VistaTableroCronometro extends javax.swing.JFrame{
 	        pnlCrono.add(etiquetaPuntos);
 	        pnlCrono.add(btnGanar);
 	        pnlCrono.add(btnPerder);
-
+	        pnlCrono.add(btnCasilla);
 
 	        etiquetaTiempo.setFont(new java.awt.Font("Lucida Sans", 0, 18)); 
-	        etiquetaTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+	        //etiquetaTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 	        etiquetaTiempo.setText("00:00:00:00");
 
 	        btnStart.setText("Iniciar");
@@ -123,7 +126,44 @@ public class VistaTableroCronometro extends javax.swing.JFrame{
 	        
 	        etiquetaPuntos.setFont(new java.awt.Font("Corbel", 1, 18)); 
 	        etiquetaPuntos.setText(""+puntos);
-	        pack();
+	        
+	        
+	        btnCasilla.setText("        ");
+	        btnCasilla.setSize(500,500);
+	        btnCasilla.setEnabled(true);
+	        btnCasilla.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	            	Random rn = new Random();
+	            	int n = rn.nextInt(9 - 0 + 1) + 0;
+	            	if (n == 0) {
+	            		btnCasilla.setText("BOMBA");
+					}else {
+						btnCasilla.setText(""+n);
+					}
+	            }
+	        });
+	        int tamaño = 9;
+	        
+	        for (int i = 0; i < tamaño; i++) {
+	        	javax.swing.JButton btnCasilla2 = new javax.swing.JButton();
+	        	pnlCrono.add(btnCasilla2);
+	        	btnCasilla2.setText("        ");
+	        	btnCasilla2.setSize(500,500);
+	        	btnCasilla2.setEnabled(true);
+	        	btnCasilla2.addActionListener(new java.awt.event.ActionListener() {
+		            public void actionPerformed(java.awt.event.ActionEvent evt) {
+		            	Random rn = new Random();
+		            	int n = rn.nextInt(9 - 0 + 1) + 0;
+		            	if (n == 0) {
+		            		btnCasilla2.setText("BOMBA");
+						}else {
+							btnCasilla2.setText(""+n);
+						}
+		            }
+		        });
+			}
+	
+	        //pack();
 	    }
 
 	    private Timer t;
@@ -193,7 +233,7 @@ public class VistaTableroCronometro extends javax.swing.JFrame{
 	            	VistaTableroCronometro a = new VistaTableroCronometro();
 	            	a.setVisible(true);
 	            	a.setSize(720, 720);
-	                
+	          
 	            }
 	        });
 	    }
