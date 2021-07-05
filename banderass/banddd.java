@@ -12,13 +12,18 @@ import javax.swing.JFrame;
  * @author vejat
  */
 public class banddd extends JFrame {
-    boolean bandera= true;
-    public banddd(){
-        setSize(500,500);
+    
+    
+
+    banddd(boolean[][] matriz, int matrizrial[][]) {
+        // click derecho en x e y
+        int x=3, y=4;
+        matriz [x] [y]= true;
+        
+        matrizrial [x] [y]= 5;
+        //inseertar bandera
         
     }
-    public void ponerbandera(){
-        int a;
-    }
+        
     
 }
