@@ -1,5 +1,7 @@
-package prueba3;
 
+package Vista;
+
+import Logica.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -10,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 import java.util.StringTokenizer;
 
 import javax.swing.ImageIcon;
@@ -24,142 +27,257 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
-public class VistaTableroCronometro extends javax.swing.JFrame{
-	
-    private javax.swing.JButton btnPause;
-    private javax.swing.JButton btnStart;
-    private javax.swing.JButton btnStop;
-    private javax.swing.JLabel etiquetaTiempo;
-    private javax.swing.JPanel pnlCrono;
-	  public VistaTableroCronometro() {
-		  
-	        initComponents();
-	        setLocationRelativeTo(null);
-	        t = new Timer(10, acciones);
-	    }
+public class VistaTableroCronometro extends javax.swing.JFrame {
 
-	    @SuppressWarnings("unchecked")
+	private javax.swing.JButton btnPause;
+	private javax.swing.JButton btnStart;
+	private javax.swing.JButton btnStop;
+	private javax.swing.JButton btnGanar;
+	private javax.swing.JButton btnPerder;
+	private javax.swing.JLabel etiquetaReloj;
+	private javax.swing.JLabel etiquetaTiempo;
+	private javax.swing.JLabel etiquetaTitulo;
+	private javax.swing.JLabel etiquetaPuntos;
+	private javax.swing.JPanel pnlCrono;
+	private javax.swing.JButton btnCasilla;
+	// Creacion de texto, botones, cajas de texto, etc....
+	JButton iniciar_reiniciar = new JButton("R");
+	JButton menu = new JButton("M");
+	JLabel puntaje = new JLabel("Point: ");
+	JLabel cronometro = new JLabel("Cronometro: ");
+	JLabel JLabel3 = new JLabel("Botton 1");
+	JLabel JLabel4 = new JLabel("Botton 1");
+	private int puntos = 0;
 
-	    private void initComponents() {
-	    	pnlCrono = new javax.swing.JPanel();
-	        etiquetaTiempo = new javax.swing.JLabel();
-	        btnStart = new javax.swing.JButton();
-	        btnPause = new javax.swing.JButton();
-	        btnStop = new javax.swing.JButton();
-	        
-	        
-	        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-	        setTitle("Buscovid");
+	public VistaTableroCronometro() {
 
-	        this.getContentPane().add(pnlCrono);
-	        
-	        pnlCrono.add(etiquetaTiempo);
-	        pnlCrono.add(btnStart);
-	        pnlCrono.add(btnPause);
-	        pnlCrono.add(btnStop);
+		initComponents();
+		setLocationRelativeTo(null);
+		t = new Timer(10, acciones);
+	}
 
-	        etiquetaTiempo.setFont(new java.awt.Font("Lucida Sans", 0, 18)); 
-	        etiquetaTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-	        etiquetaTiempo.setText("00:00:00:00");
+	@SuppressWarnings("unchecked")
 
-	        btnStart.setText("Iniciar");
-	        btnStart.addActionListener(new java.awt.event.ActionListener() {
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	                btnStartActionPerformed(evt);
-	            }
-	        });
+	private void initComponents() {
+		pnlCrono = new javax.swing.JPanel();
+		etiquetaReloj = new javax.swing.JLabel();
+		etiquetaTitulo = new javax.swing.JLabel();
+		etiquetaTiempo = new javax.swing.JLabel();
+		etiquetaPuntos = new javax.swing.JLabel();
+		btnStart = new javax.swing.JButton();
+		btnPause = new javax.swing.JButton();
+		btnGanar = new javax.swing.JButton();
+		btnPerder = new javax.swing.JButton();
+		btnStop = new javax.swing.JButton();
+		btnCasilla = new javax.swing.JButton();
 
-	        btnPause.setText("Pausar");
-	        btnPause.setEnabled(false);
-	        btnPause.addActionListener(new java.awt.event.ActionListener() {
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	                btnPauseActionPerformed(evt);
-	            }
-	        });
+		pnlCrono.setLayout(null);
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setTitle("Buscovid");
 
-	        btnStop.setText("Detener");
-	        btnStop.setEnabled(false);
-	        btnStop.addActionListener(new java.awt.event.ActionListener() {
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	                btnStopActionPerformed(evt);
-	            }
-	        });
+		this.getContentPane().add(pnlCrono);
 
-	        pack();
-	    }
+		pnlCrono.add(etiquetaReloj);
+		pnlCrono.add(etiquetaTiempo);
+		pnlCrono.add(btnStart);
+		pnlCrono.add(btnPause);
+		pnlCrono.add(btnStop);
+		pnlCrono.add(etiquetaTitulo);
+		pnlCrono.add(etiquetaPuntos);
+		pnlCrono.add(btnGanar);
+		pnlCrono.add(btnPerder);
+		pnlCrono.add(btnCasilla);
 
-	    private Timer t;
-	    private int h, m, s, cs;
-	    private ActionListener acciones = new ActionListener(){
+		etiquetaTiempo.setFont(new java.awt.Font("Lucida Sans", 0, 18));
+		etiquetaTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		etiquetaTiempo.setText("00:00:00:00");
+		etiquetaTiempo.setBounds(200, 65, 150, 50);
 
-	        @Override
-	        public void actionPerformed(ActionEvent ae) {
-	            ++cs; 
-	            if(cs==100){
-	                cs = 0;
-	                ++s;
-	            }
-	            if(s==60) 
-	            {
-	                s = 0;
-	                ++m;
-	            }
-	            if(m==60)
-	            {
-	                m = 0;
-	                ++h;
-	            }
-	            actualizarLabel();
-	        }
-	        
-	    };
-	    
-	    private void actualizarLabel() {
-	        String tiempo = (h<=9?"0":"")+h+":"+(m<=9?"0":"")+m+":"+(s<=9?"0":"")+s+":"+(cs<=9?"0":"")+cs;
-	        etiquetaTiempo.setText(tiempo);
-	    }
-	    
-	    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {
-	        t.start();
-	        btnStart.setEnabled(false);
-	        btnStart.setText("Reanudar");
-	        btnPause.setEnabled(true);
-	        btnStop.setEnabled(true);
-	    }
+		btnStart.setText("Iniciar");
+		btnStart.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnStartActionPerformed(evt);
+			}
+		});
 
-	    private void btnPauseActionPerformed(java.awt.event.ActionEvent evt) {
-	        t.stop();
-	        btnStart.setEnabled(true);
-	        btnPause.setEnabled(false);
-	    }
+		btnPause.setText("Pausar");
+		btnPause.setEnabled(false);
+		btnPause.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnPauseActionPerformed(evt);
+			}
+		});
 
-	    private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {
-	        if(t.isRunning()) 
-	        {
-	            t.stop();
-	            btnStart.setEnabled(true);
-	        }
-	        btnStart.setText("Iniciar");
-	        btnPause.setEnabled(false);
-	        btnStop.setEnabled(false);
-	        h=0; m=0; s=0; cs=0;
-	        actualizarLabel();
-	    }
+		btnStop.setText("Detener");
+		btnStop.setEnabled(false);
+		btnStop.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnStopActionPerformed(evt);
+			}
+		});
 
+		btnGanar.setText("Acierto");
+		btnGanar.setEnabled(true);
+		btnGanar.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				puntos++;
+				etiquetaPuntos.setText("" + puntos);
+			}
+		});
+		btnGanar.setBounds(500, 150, 150, 50);
 
-	    public static void main(String args[]) {
-	    	
-	        java.awt.EventQueue.invokeLater(new Runnable() {
-	            @Override
-	            public void run() {
-	            	VistaTableroCronometro a = new VistaTableroCronometro();
-	            	a.setVisible(true);
-	            	a.setSize(720, 720);
-	                
-	            }
-	        });
-	    }
+		btnPerder.setText("Pierde");
+		btnPerder.setEnabled(true);
+		btnPerder.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				puntos = 0;
+				etiquetaPuntos.setText("" + puntos);
+			}
+		});
+		etiquetaTitulo.setFont(new java.awt.Font("Corbel", 1, 18));
+		etiquetaTitulo.setText("Puntos");
 
-	    
-	  
+		etiquetaPuntos.setFont(new java.awt.Font("Corbel", 1, 18));
+		etiquetaPuntos.setText("" + puntos);
+		etiquetaPuntos.setBounds(200, 30, 150, 50);
+
+		btnCasilla.setText("        ");
+		btnCasilla.setBounds(500, 300, 150, 50);
+		btnCasilla.setEnabled(true);
+		btnCasilla.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				Random rn = new Random();
+				int n = rn.nextInt(9 - 0 + 1) + 0;
+				if (n == 0) {
+					btnCasilla.setText("BOMBA");
+				} else {
+					btnCasilla.setText("" + n);
+				}
+			}
+		});
+		int tamaño = 9;
+
+		for (int i = 0; i < tamaño; i++) {
+			javax.swing.JButton btnCasilla2 = new javax.swing.JButton();
+			pnlCrono.add(btnCasilla2);
+			btnCasilla2.setText("        ");
+			btnCasilla2.setBounds(500, 300 + (50 * i), 150, 50);
+			btnCasilla2.setEnabled(true);
+			btnCasilla2.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent evt) {
+					Random rn = new Random();
+					int n = rn.nextInt(9 - 0 + 1) + 0;
+					if (n == 0) {
+						btnCasilla2.setText("BOMBA");
+					} else {
+						btnCasilla2.setText("" + n);
+					}
+				}
+			});
+		}
+
+		// Texto
+		// Puntaje
+		puntaje.setBounds(100, 40, 120, 20);
+		pnlCrono.add(puntaje);
+
+		cronometro.setBounds(100, 80, 120, 20);
+		pnlCrono.add(cronometro);
+
+		// Botones
+		// Iniciar o reiniciar juego
+		iniciar_reiniciar.setBounds(500, 40, 60, 40);
+		pnlCrono.add(iniciar_reiniciar);
+		// Menu
+		menu.setBounds(600, 40, 60, 40);
+		pnlCrono.add(menu);
+		// Action boton salir
+		ActionListener action_iniciar_reiniciar = new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				btnStart.doClick();
+			}
+		};
+		iniciar_reiniciar.addActionListener(action_iniciar_reiniciar);
+
+		// Action boton salir
+		ActionListener action_menu = new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				principal.v_dificultad.setVisible(true);
+			}
+		};
+		menu.addActionListener(action_menu);
+	}
+
+	private Timer t;
+	private int h, m, s, cs;
+	private ActionListener acciones = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent ae) {
+			++cs;
+			if (cs == 100) {
+				cs = 0;
+				++s;
+			}
+			if (s == 60) {
+				s = 0;
+				++m;
+			}
+			if (m == 60) {
+				m = 0;
+				++h;
+			}
+			actualizarLabel();
+		}
+
+	};
+
+	private void actualizarLabel() {
+		String tiempo = (h <= 9 ? "0" : "") + h + ":" + (m <= 9 ? "0" : "") + m + ":" + (s <= 9 ? "0" : "") + s + ":"
+				+ (cs <= 9 ? "0" : "") + cs;
+		etiquetaTiempo.setText(tiempo);
+	}
+
+	private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {
+		t.start();
+		btnStart.setEnabled(false);
+		btnStart.setText("Reanudar");
+		btnPause.setEnabled(true);
+		btnStop.setEnabled(true);
+	}
+
+	private void btnPauseActionPerformed(java.awt.event.ActionEvent evt) {
+		t.stop();
+		btnStart.setEnabled(true);
+		btnPause.setEnabled(false);
+	}
+
+	private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {
+		if (t.isRunning()) {
+			t.stop();
+			btnStart.setEnabled(true);
+		}
+		btnStart.setText("Iniciar");
+		btnPause.setEnabled(false);
+		btnStop.setEnabled(false);
+		h = 0;
+		m = 0;
+		s = 0;
+		cs = 0;
+		actualizarLabel();
+	}
+
+	public static void main(String args[]) {
+
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				VistaTableroCronometro a = new VistaTableroCronometro();
+				a.setVisible(true);
+				a.setSize(720, 720);
+
+			}
+		});
+	}
+
 }
