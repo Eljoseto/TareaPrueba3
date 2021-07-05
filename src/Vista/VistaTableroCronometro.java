@@ -29,8 +29,14 @@ public class VistaTableroCronometro extends javax.swing.JFrame{
     private javax.swing.JButton btnPause;
     private javax.swing.JButton btnStart;
     private javax.swing.JButton btnStop;
+    private javax.swing.JButton btnGanar;
+    private javax.swing.JButton btnPerder;
+    private javax.swing.JLabel etiquetaReloj;
     private javax.swing.JLabel etiquetaTiempo;
+    private javax.swing.JLabel etiquetaTitulo;
+    private javax.swing.JLabel etiquetaPuntos;
     private javax.swing.JPanel pnlCrono;
+    private int puntos=0;
 	  public VistaTableroCronometro() {
 		  
 	        initComponents();
@@ -42,9 +48,14 @@ public class VistaTableroCronometro extends javax.swing.JFrame{
 
 	    private void initComponents() {
 	    	pnlCrono = new javax.swing.JPanel();
+	        etiquetaReloj = new javax.swing.JLabel();
+	        etiquetaTitulo = new javax.swing.JLabel();
 	        etiquetaTiempo = new javax.swing.JLabel();
+	        etiquetaPuntos = new javax.swing.JLabel();
 	        btnStart = new javax.swing.JButton();
 	        btnPause = new javax.swing.JButton();
+	        btnGanar = new javax.swing.JButton();
+	        btnPerder = new javax.swing.JButton();
 	        btnStop = new javax.swing.JButton();
 	        
 	        
@@ -53,10 +64,16 @@ public class VistaTableroCronometro extends javax.swing.JFrame{
 
 	        this.getContentPane().add(pnlCrono);
 	        
+	        pnlCrono.add(etiquetaReloj);
 	        pnlCrono.add(etiquetaTiempo);
 	        pnlCrono.add(btnStart);
 	        pnlCrono.add(btnPause);
 	        pnlCrono.add(btnStop);
+	        pnlCrono.add(etiquetaTitulo);
+	        pnlCrono.add(etiquetaPuntos);
+	        pnlCrono.add(btnGanar);
+	        pnlCrono.add(btnPerder);
+
 
 	        etiquetaTiempo.setFont(new java.awt.Font("Lucida Sans", 0, 18)); 
 	        etiquetaTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -85,6 +102,27 @@ public class VistaTableroCronometro extends javax.swing.JFrame{
 	            }
 	        });
 
+	        btnGanar.setText("Acierto");
+	        btnGanar.setEnabled(true);
+	        btnGanar.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	              puntos++;
+	              etiquetaPuntos.setText(""+puntos);
+	            }
+	        });
+	        btnPerder.setText("Pierde");
+	        btnPerder.setEnabled(true);
+	        btnPerder.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	              puntos=0;
+	              etiquetaPuntos.setText(""+puntos);
+	            }
+	        });
+	        etiquetaTitulo.setFont(new java.awt.Font("Corbel", 1, 18)); 
+	        etiquetaTitulo.setText("Puntos");
+	        
+	        etiquetaPuntos.setFont(new java.awt.Font("Corbel", 1, 18)); 
+	        etiquetaPuntos.setText(""+puntos);
 	        pack();
 	    }
 
