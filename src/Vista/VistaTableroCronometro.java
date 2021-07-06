@@ -1,8 +1,10 @@
-
 package Vista;
 
 import Logica.*;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.StringTokenizer;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -34,19 +37,12 @@ public class VistaTableroCronometro extends javax.swing.JFrame {
 	private javax.swing.JButton btnStop;
 	private javax.swing.JButton btnGanar;
 	private javax.swing.JButton btnPerder;
+	private javax.swing.JButton btnCasilla;
 	private javax.swing.JLabel etiquetaReloj;
 	private javax.swing.JLabel etiquetaTiempo;
 	private javax.swing.JLabel etiquetaTitulo;
 	private javax.swing.JLabel etiquetaPuntos;
 	private javax.swing.JPanel pnlCrono;
-	private javax.swing.JButton btnCasilla;
-	// Creacion de texto, botones, cajas de texto, etc....
-	JButton iniciar_reiniciar = new JButton("R");
-	JButton menu = new JButton("M");
-	JLabel puntaje = new JLabel("Point: ");
-	JLabel cronometro = new JLabel("Cronometro: ");
-	JLabel JLabel3 = new JLabel("Botton 1");
-	JLabel JLabel4 = new JLabel("Botton 1");
 	private int puntos = 0;
 
 	public VistaTableroCronometro() {
@@ -59,6 +55,13 @@ public class VistaTableroCronometro extends javax.swing.JFrame {
 	@SuppressWarnings("unchecked")
 
 	private void initComponents() {
+		// Creacion de texto, botones, cajas de texto, etc....
+		JButton iniciar_reiniciar = new JButton("R");
+		JButton menu = new JButton("M");
+		JLabel puntaje = new JLabel("Point: ");
+		JLabel cronometro = new JLabel("Cronometro: ");
+		JLabel JLabel3 = new JLabel("Botton 1");
+		JLabel JLabel4 = new JLabel("Botton 1");
 		pnlCrono = new javax.swing.JPanel();
 		etiquetaReloj = new javax.swing.JLabel();
 		etiquetaTitulo = new javax.swing.JLabel();
@@ -68,15 +71,18 @@ public class VistaTableroCronometro extends javax.swing.JFrame {
 		btnPause = new javax.swing.JButton();
 		btnGanar = new javax.swing.JButton();
 		btnPerder = new javax.swing.JButton();
-		btnStop = new javax.swing.JButton();
 		btnCasilla = new javax.swing.JButton();
+		btnStop = new javax.swing.JButton();
 
-		pnlCrono.setLayout(null);
+		JPanel pnlPrincipal = new JPanel();
+		pnlPrincipal.setLayout(new BoxLayout(pnlPrincipal, BoxLayout.Y_AXIS));
+		this.add(pnlPrincipal);
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Buscovid");
 
-		this.getContentPane().add(pnlCrono);
-
+		pnlPrincipal.add(pnlCrono);
+		// pnlCrono.setLayout(new BoxLayout(pnlCrono, BoxLayout.Y_AXIS));
+		// pnlCrono.setBounds(0, 0, 720, 100);
 		pnlCrono.add(etiquetaReloj);
 		pnlCrono.add(etiquetaTiempo);
 		pnlCrono.add(btnStart);
@@ -86,12 +92,12 @@ public class VistaTableroCronometro extends javax.swing.JFrame {
 		pnlCrono.add(etiquetaPuntos);
 		pnlCrono.add(btnGanar);
 		pnlCrono.add(btnPerder);
-		pnlCrono.add(btnCasilla);
+		// pnlCrono.add(btnCasilla);
+		pnlCrono.setLayout(null);
 
 		etiquetaTiempo.setFont(new java.awt.Font("Lucida Sans", 0, 18));
-		etiquetaTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		// etiquetaTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		etiquetaTiempo.setText("00:00:00:00");
-		etiquetaTiempo.setBounds(200, 65, 150, 50);
 
 		btnStart.setText("Iniciar");
 		btnStart.addActionListener(new java.awt.event.ActionListener() {
@@ -124,8 +130,6 @@ public class VistaTableroCronometro extends javax.swing.JFrame {
 				etiquetaPuntos.setText("" + puntos);
 			}
 		});
-		btnGanar.setBounds(500, 150, 150, 50);
-
 		btnPerder.setText("Pierde");
 		btnPerder.setEnabled(true);
 		btnPerder.addActionListener(new java.awt.event.ActionListener() {
@@ -139,42 +143,9 @@ public class VistaTableroCronometro extends javax.swing.JFrame {
 
 		etiquetaPuntos.setFont(new java.awt.Font("Corbel", 1, 18));
 		etiquetaPuntos.setText("" + puntos);
-		etiquetaPuntos.setBounds(200, 30, 150, 50);
+		etiquetaPuntos.setBounds(200, 40, 120, 20);
 
-		btnCasilla.setText("        ");
-		btnCasilla.setBounds(500, 300, 150, 50);
-		btnCasilla.setEnabled(true);
-		btnCasilla.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				Random rn = new Random();
-				int n = rn.nextInt(9 - 0 + 1) + 0;
-				if (n == 0) {
-					btnCasilla.setText("BOMBA");
-				} else {
-					btnCasilla.setText("" + n);
-				}
-			}
-		});
-		int tamaño = 9;
-
-		for (int i = 0; i < tamaño; i++) {
-			javax.swing.JButton btnCasilla2 = new javax.swing.JButton();
-			pnlCrono.add(btnCasilla2);
-			btnCasilla2.setText("        ");
-			btnCasilla2.setBounds(500, 300 + (50 * i), 150, 50);
-			btnCasilla2.setEnabled(true);
-			btnCasilla2.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent evt) {
-					Random rn = new Random();
-					int n = rn.nextInt(9 - 0 + 1) + 0;
-					if (n == 0) {
-						btnCasilla2.setText("BOMBA");
-					} else {
-						btnCasilla2.setText("" + n);
-					}
-				}
-			});
-		}
+		etiquetaTiempo.setBounds(200, 80, 120, 20);
 
 		// Texto
 		// Puntaje
@@ -206,6 +177,41 @@ public class VistaTableroCronometro extends javax.swing.JFrame {
 			}
 		};
 		menu.addActionListener(action_menu);
+
+		Tablero a = new Tablero(9);
+		a.initTablero();
+		a.printTablero();
+
+		JPanel pnlTablero = new JPanel();
+		// pnlTablero.setBounds(400, 200, 150, 150);
+		// pnlTablero.setLayout();
+		pnlPrincipal.add(pnlTablero, BorderLayout.CENTER);
+		pnlTablero.setPreferredSize(new Dimension(410, 410));
+		pnlTablero.setMaximumSize(new Dimension(415, 415));
+		int tamaño = 9;
+
+		for (int i = 0; i < tamaño; i++) {
+			for (int j = 0; j < 9; j++) {
+				javax.swing.JButton btnCasilla2 = new javax.swing.JButton();
+				pnlTablero.add(btnCasilla2, BorderLayout.CENTER);
+				btnCasilla2.setText(" ");
+				String contenido = "" + a.obtenerMatrizGenerada()[i][j];
+				btnCasilla2.setSize(500, 500);
+				btnCasilla2.setEnabled(true);
+				btnCasilla2.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						/*
+						 * Random rn = new Random(); int n = rn.nextInt(9 - 0 + 1) + 0; if (n == 0) {
+						 * btnCasilla2.setText("BOMBA"); }else { btnCasilla2.setText(""+n); }
+						 */
+						btnCasilla2.setText(contenido);
+
+					}
+
+				});
+			}
+		}
+
 	}
 
 	private Timer t;
@@ -265,19 +271,6 @@ public class VistaTableroCronometro extends javax.swing.JFrame {
 		s = 0;
 		cs = 0;
 		actualizarLabel();
-	}
-
-	public static void main(String args[]) {
-
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				VistaTableroCronometro a = new VistaTableroCronometro();
-				a.setVisible(true);
-				a.setSize(720, 720);
-
-			}
-		});
 	}
 
 }
