@@ -1,6 +1,8 @@
 package prueba3;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -13,6 +15,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.StringTokenizer;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -61,12 +64,15 @@ public class VistaTableroCronometro extends javax.swing.JFrame{
 	        btnCasilla = new javax.swing.JButton();
 	        btnStop = new javax.swing.JButton();
 	        
-	        
-	      //  setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+	        JPanel pnlPrincipal = new JPanel();
+	        pnlPrincipal.setLayout(new BoxLayout(pnlPrincipal, BoxLayout.Y_AXIS));
+	        this.add(pnlPrincipal);
+	       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 	        setTitle("Buscovid");
 
-	        this.getContentPane().add(pnlCrono);
-	        
+	        pnlPrincipal.add(pnlCrono);
+	        //pnlCrono.setLayout(new BoxLayout(pnlCrono, BoxLayout.Y_AXIS));
+	        //pnlCrono.setBounds(0, 0, 720, 100);
 	        pnlCrono.add(etiquetaReloj);
 	        pnlCrono.add(etiquetaTiempo);
 	        pnlCrono.add(btnStart);
@@ -76,7 +82,9 @@ public class VistaTableroCronometro extends javax.swing.JFrame{
 	        pnlCrono.add(etiquetaPuntos);
 	        pnlCrono.add(btnGanar);
 	        pnlCrono.add(btnPerder);
-	        pnlCrono.add(btnCasilla);
+	        //pnlCrono.add(btnCasilla);
+	        pnlCrono.setLayout(null);
+	        
 
 	        etiquetaTiempo.setFont(new java.awt.Font("Lucida Sans", 0, 18)); 
 	        //etiquetaTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -147,13 +155,18 @@ public class VistaTableroCronometro extends javax.swing.JFrame{
 	        a.initTablero();
 	        a.printTablero();
 	        
-	        
+	        JPanel pnlTablero = new JPanel();
+	        //pnlTablero.setBounds(400, 200, 150, 150);
+	       // pnlTablero.setLayout();
+	        pnlPrincipal.add(pnlTablero, BorderLayout.CENTER);
+	        pnlTablero.setPreferredSize(new Dimension(410,410));
+	        pnlTablero.setMaximumSize(new Dimension(415, 415));
 	        int tamaño = 9;
 	        
 	        for (int i = 0; i < tamaño; i++) {
 				for (int j = 0; j < 9; j++) {
 		        	javax.swing.JButton btnCasilla2 = new javax.swing.JButton();
-		        	pnlCrono.add(btnCasilla2);
+		        	pnlTablero.add(btnCasilla2, BorderLayout.CENTER);
 		        	btnCasilla2.setText(" ");
 		        	String contenido = ""+a.getTablero()[i][j];
 		        	btnCasilla2.setSize(500,500);
