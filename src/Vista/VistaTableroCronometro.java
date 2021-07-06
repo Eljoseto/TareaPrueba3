@@ -127,7 +127,7 @@ public class VistaTableroCronometro extends javax.swing.JFrame{
 	        etiquetaPuntos.setFont(new java.awt.Font("Corbel", 1, 18)); 
 	        etiquetaPuntos.setText(""+puntos);
 	        
-	        
+	        /*
 	        btnCasilla.setText("        ");
 	        btnCasilla.setSize(500,500);
 	        btnCasilla.setEnabled(true);
@@ -141,26 +141,39 @@ public class VistaTableroCronometro extends javax.swing.JFrame{
 						btnCasilla.setText(""+n);
 					}
 	            }
-	        });
+	        });*/
+	        
+	        Tablero a = new Tablero(9);
+	        a.initTablero();
+	        a.printTablero();
+	        
+	        
 	        int tamaño = 9;
 	        
 	        for (int i = 0; i < tamaño; i++) {
-	        	javax.swing.JButton btnCasilla2 = new javax.swing.JButton();
-	        	pnlCrono.add(btnCasilla2);
-	        	btnCasilla2.setText("        ");
-	        	btnCasilla2.setSize(500,500);
-	        	btnCasilla2.setEnabled(true);
-	        	btnCasilla2.addActionListener(new java.awt.event.ActionListener() {
-		            public void actionPerformed(java.awt.event.ActionEvent evt) {
-		            	Random rn = new Random();
-		            	int n = rn.nextInt(9 - 0 + 1) + 0;
-		            	if (n == 0) {
-		            		btnCasilla2.setText("BOMBA");
-						}else {
-							btnCasilla2.setText(""+n);
-						}
-		            }
-		        });
+				for (int j = 0; j < 9; j++) {
+		        	javax.swing.JButton btnCasilla2 = new javax.swing.JButton();
+		        	pnlCrono.add(btnCasilla2);
+		        	btnCasilla2.setText(" ");
+		        	String contenido = ""+a.getTablero()[i][j];
+		        	btnCasilla2.setSize(500,500);
+		        	btnCasilla2.setEnabled(true);
+		        	btnCasilla2.addActionListener(new java.awt.event.ActionListener() {
+			            public void actionPerformed(java.awt.event.ActionEvent evt) {
+			            	/*
+			            	Random rn = new Random();
+			            	int n = rn.nextInt(9 - 0 + 1) + 0;
+			            	if (n == 0) {
+			            		btnCasilla2.setText("BOMBA");
+							}else {
+								btnCasilla2.setText(""+n);
+							}*/
+			            	btnCasilla2.setText(contenido);
+			            	
+			            }
+			            	
+			        });
+				}
 			}
 	
 	        //pack();
@@ -236,6 +249,8 @@ public class VistaTableroCronometro extends javax.swing.JFrame{
 	          
 	            }
 	        });
+	        
+
 	    }
 
 	    
